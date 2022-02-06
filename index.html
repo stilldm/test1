@@ -1,0 +1,34 @@
+<?php
+    class test1 extends CI_Controller {
+        
+        function __construct() {
+            parent::__construct();
+            
+            // unit_testライブラリのロード
+            $this->load->library('unit_test');
+        }
+
+        public function index() {
+            
+            // テストしたい内容
+            $test =  get_holiday_table("2022");
+			console_log($test);
+            
+            // 予想されるテスト結果
+            $expected_result ="is_array";
+            // テストの名称
+            $test_name = 'get_holiday_table';
+            
+            // メモ
+            $test_note = 'Test note';
+            // テストを実行
+            $this->unit->run($test, $expected_result, $test_name, $test_note);
+            
+            // 結果を表示
+            echo $this->unit->report();
+            
+            // テスト結果以外の表示
+            echo 'ok';
+        }
+        
+    }
